@@ -1,0 +1,36 @@
+<h2>Clientes</h2>
+
+<button (click)="create()" *ngIf="auth.isAdmin">Nuevo cliente</button>
+
+<table border="1" width="100%" style="margin-top:10px">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Correo</th>
+      <th>Antigüedad</th>
+      <th>Deudas</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let c of customers">
+      <td>{{c.nombre}}</td>
+      <td>{{c.correo}}</td>
+      <td>{{c.antiguedad}}</td>
+      <td>{{c.deudas}}</td>
+      <td>
+        <button *ngIf="auth.isAdmin" (click)="edit(c.id)">Editar</button>
+        <button *ngIf="auth.isAdmin" (click)="delete(c.id)">Eliminar</button>
+        <button (click)="viewInvoices(c.id)">Facturas</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="invoices.length">
+  <h3>Facturas</h3>
+  <div *ngFor="let f of invoices" style="white-space:pre-wrap;border:1px solid #aaa;margin:10px;padding:10px">
+    {{f}}
+  </div>
+</div>
